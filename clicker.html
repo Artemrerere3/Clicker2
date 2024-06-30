@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра-кликер с хомяком</title>
+    <style>
+        .hamster {
+    /* Другие стили изображения */
+    border: 10px solid; /* Установка ширины обводки */
+    border-image: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%) 1; /* Градиент обводки */
+}
+
+        body {
+    /* Линейный градиент фона с двумя цветами */
+    background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+    
+    /* Анимация фона */
+    animation: Gradient 15s ease infinite;
+    background-size: 400% 400%;
+}
+
+/* Ключевые кадры для анимации градиента */
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Стилизация текста */
+.header {
+    font-size: 2em;
+    color: #333;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Стилизация счётчика */
+.score {
+    font-size: 1.5em;
+    color: #fff;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Общие стили кнопок */
+.button {
+    /* Стили остаются без изменений */
+}
+
+/* Добавление эффектов при наведении на кнопку */
+.button:hover {
+    /* Стили остаются без изменений */
+}
+
+/* Стилизация изображения хомяка */
+.hamster {
+    /* Стили остаются без изменений */
+}
+
+/* Эффекты при нажатии на хомяка */
+.hamster:active {
+    /* Стили остаются без изменений */
+}
+
+        /* Основные стили */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Изменено для вертикального выравнивания */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Стилизация контейнера кликера */
+        .clicker {
+            text-align: center;
+            border: 2px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Стилизация счетчика */
+        .score {
+            font-size: 2em;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        /* Стилизация кнопки */
+        .button {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #005f73;
+        }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 600px) {
+            .clicker {
+                width: 90%;
+                margin: auto;
+            }
+        }
+
+        /* Дополнительные стили для анимации и интерактивности */
+        .button:active {
+            transform: scale(0.98);
+        }
+
+        /* Стилизация для отображения активности */
+        .button:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 124, 186, 0.5);
+        }
+
+        /* Плавное изменение цветов */
+        .button {
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        /* Стилизация текста внутри кнопки */
+        .button span {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Добавление теней для эффекта глубины */
+        .clicker {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .header {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .hamster {
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .hamster:active {
+            transform: scale(1.1);
+        }
+
+        .score {
+            color: #333;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            order: 2; /* Добавлено для изменения порядка */
+        }
+
+        .header {
+            order: 1; /* Добавлено для изменения порядка */
+        }
+
+        .clicker {
+            order: 3; /* Добавлено для изменения порядка */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Зарабатывай на хамечке</div>
+    <div id="score">Счет: 0</div>
+    <img src="https://sun9-6.userapi.com/impf/eH9H9SM2FzupVAxP0MEFXU3p16vJgw754TLcJw/Y5V02PBW1Bk.jpg?size=604x604&quality=96&sign=37b7c543433a71f530dfe62934d01c57" class="hamster" id="hamster" alt="Хомяк" width=200>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+    let score = 0; // Инициализация счёта
+
+    // Функция для обработки нажатия на хомяка
+    function tapHamster() {
+        score++; // Увеличение счёта
+        document.getElementById('score').textContent = 'Счет: ' + score; // Обновление текста счёта
+    }
+
+    // Привязка функции tapHamster к событию клика по изображению хомяка
+    document.getElementById('hamster').addEventListener('click', tapHamster);
+});
+
+        // Ваш JavaScript-код остается без изменений
+    </script>
+</body>
+</html>
